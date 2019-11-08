@@ -1,9 +1,5 @@
 <?php
-    foreach ($_SESSION as $key => $value) {
-        ECHO $value;
-    }
-    echo "SELECT p.* from project p INNER JOIN user u ON u.area = p.id WHERE u.id =".$_SESSION["user_id"];
-    
+  
     $queryproject = "";
     $querypriority = "";
     $querystatus = "";
@@ -17,21 +13,20 @@
         $querykind = "select * from kind";
         $querycategory = "select * from category";
     }else{
-        $queryproject = "select * from project";
-        $querypriority = "select * from priority";
-        $querystatus = "select * from status";
+        $queryproject = "SELECT p.* from project p INNER JOIN user u ON u.area = p.id WHERE u.id =".$_SESSION["user_id"];
+        $querypriority = "select * from priority WHERE id = 2";
+        $querystatus = "select * from status WHERE id = 1";
         $querykind = "select * from kind";
         $querycategory = "select * from category";
     }
 
 
-    $projects =mysqli_query($con, "SELECT p.* from project p INNER JOIN user u ON u.area = p.id WHERE u.id =".$_SESSION["user_id"]==4 ? "u.id" : $_SESSION["user_id"] );
-    $priorities =mysqli_query($con, "select * from priority");
-    $statuses =mysqli_query($con, "select * from status");
-    $kinds =mysqli_query($con, "select * from kind");
-    $categories =mysqli_query($con, "select * from category");
+    $projects =mysqli_query($con, $queryproject);
+    $priorities =mysqli_query($con, $querypriority);
+    $statuses =mysqli_query($con, $querystatus);
+    $kinds =mysqli_query($con, $querykind);
+    $categories =mysqli_query($con, $querycategory);
 
-    $_SESSION["user_id"];
 ?>
 
     <div> <!-- Modal -->
@@ -62,25 +57,28 @@
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Titulo<span class="required">*</span></label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                              <input type="text" name="title" class="form-control" placeholder="Titulo" >
+                              <input type="text" name="title" class="form-control" placeholder="Titulo">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Descripción <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Detalle su problema <span class="required">*</span>
                             </label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                              <textarea name="description" class="form-control col-md-7 col-xs-12"  placeholder="Descripción"></textarea>
+                              <textarea name="description" class="form-control col-md-7 col-xs-12"  placeholder="Descripción" ></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Proyecto
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Área
                             </label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select class="form-control" name="project_id" >
-                                    <option selected="" value="">-- Selecciona --</option>
-                                      <?php foreach($projects as $p):?>
-                                        <option value="<?php echo $p['id']; ?>"><?php echo $p['name']; ?></option>
-                                      <?php endforeach; ?>
+                                <select class="form-control" name="project_id" <?php if ($_SESSION["nivel"] !== 'Administrador' || $_SESSION["nivel"] !== 'Soporte') { ?>disabled<?php } ?>>
+                                    <?php if ($_SESSION["nivel"] == 'Administrador' || $_SESSION["nivel"] == 'Soporte') { ?>
+                                        <option selected="" value="">-- Selecciona --</option>        
+                                    <?php } ?>
+                                    
+                                    <?php foreach($projects as $p):?>
+                                    <option value="<?php echo $p['id']; ?>"><?php echo $p['name']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -100,11 +98,14 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Prioridad
                             </label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select class="form-control" name="priority_id" >
-                                    <option selected="" value="">-- Selecciona --</option>
-                                  <?php foreach($priorities as $p):?>
-                                    <option value="<?php echo $p['id']; ?>"><?php echo $p['name']; ?></option>
-                                  <?php endforeach; ?>
+                                <select class="form-control" name="priority_id" <?php if ($_SESSION["nivel"] !== 'Administrador' || $_SESSION["nivel"] !== 'Soporte') { ?>disabled<?php } ?>>
+                                    <?php if ($_SESSION["nivel"] == 'Administrador' || $_SESSION["nivel"] == 'Soporte') { ?>
+                                        <option selected="" value="">-- Selecciona --</option>
+                                    <?php } ?>
+                                    
+                                    <?php foreach($priorities as $p):?>
+                                        <option value="<?php echo $p['id']; ?>"><?php echo $p['name']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -112,24 +113,23 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado
                             </label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
-                                <select class="form-control" name="status_id" >
-                                    <option selected="" value="">-- Selecciona --</option>
-                                  <?php foreach($statuses as $p):?>
-                                    <option value="<?php echo $p['id']; ?>"><?php echo $p['name']; ?></option>
-                                  <?php endforeach; ?>
+                                <select class="form-control" name="status_id" <?php if ($_SESSION["nivel"] !== 'Administrador' || $_SESSION["nivel"] !== 'Soporte') { ?>disabled<?php } ?>>
+                                    <?php if ($_SESSION["nivel"] == 'Administrador' || $_SESSION["nivel"] == 'Soporte') { ?>
+                                        <option selected="" value="">-- Selecciona --</option>
+                                    <?php } ?>
+                                    <?php foreach($statuses as $p):?>
+                                        <option value="<?php echo $p['id']; ?>"><?php echo $p['name']; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
                         <div class="ln_solid"></div>
                         <div class="form-group">
-                            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                            <div class="col-md alignright">
                               <button id="save_data" type="submit" class="btn btn-success">Guardar</button>
                             </div>
                         </div>    
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>

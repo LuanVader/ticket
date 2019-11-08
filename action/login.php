@@ -14,6 +14,7 @@
 
 				$_SESSION['user_id'] = $row['id'];
 				$_SESSION['nivel'] = $row['nivel'];
+				$_SESSION['area'] = $row['area'];
 				header("location: ../dashboard.php");
 				
 

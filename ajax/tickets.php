@@ -1,5 +1,5 @@
 <?php
-
+session_start();
     include "../config/config.php";//Contiene funcion que conecta a la base de datos
     
     $action = (isset($_REQUEST['action']) && $_REQUEST['action'] !=NULL)?$_REQUEST['action']:'';
@@ -42,7 +42,19 @@
             }
             $sWhere = substr_replace( $sWhere, "", -3 );
             $sWhere .= ')';
-        }
+            if ($_SESSION["nivel"] == 'Administrador' || $_SESSION["nivel"] == 'Soporte') {
+                $sWhere.='';
+            }else{
+                $sWhere .= 'AND user_id = '.$_SESSION['user_id'];    
+            }
+        }else{
+            if ($_SESSION["nivel"] == 'Administrador' || $_SESSION["nivel"] == 'Soporte') {
+                $sWhere.='';
+            }else{
+                $sWhere .= 'WHERE user_id = '.$_SESSION['user_id'];
+            }
+         }
+        
         $sWhere.=" order by created_at desc";
         include 'pagination.php'; //include pagination file
         //pagination variables
@@ -52,6 +64,8 @@
         $offset = ($page - 1) * $per_page;
         //Count the total number of row in your table*/
         $count_query   = mysqli_query($con, "SELECT count(*) AS numrows FROM $sTable  $sWhere");
+
+        //echo "SELECT count(*) AS numrows FROM $sTable  $sWhere";
         $row= mysqli_fetch_array($count_query);
         $numrows = $row['numrows'];
         $total_pages = ceil($numrows/$per_page);
