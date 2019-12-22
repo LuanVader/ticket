@@ -46,15 +46,6 @@
 		}
 		
 
-		echo 'title - '.$title.'</br>';
-		echo 'description - '.$description.'</br>';
-		echo 'category_id - '.$category_id.'</br>';
-		echo 'project_id - '.$project_id.'</br>';
-		echo 'priority_id - '.$priority_id.'</br>';
-		echo 'user_id - '.$user_id.'</br>';
-		echo 'status_id - '.$status_id.'</br>';
-		echo 'kind_id - '.$kind_id.'</br>';
-		echo 'created_at - '.$created_at.'</br>';
 
 		// $user_id=$_SESSION['user_id'];
 

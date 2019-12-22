@@ -31,40 +31,40 @@
                         <form class="form-horizontal" role="form">
                             <input type="hidden" name="view" value="reports">
                             <div class="form-group">
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                                    <select name="project_id" class="form-control">
-                                    <option value="">PROJECTO</option>
-                                      <?php foreach($projects as $p):?>
-                                        <option value="<?php echo $p['id']; ?>" <?php if(isset($_GET["project_id"]) && $_GET["project_id"]==$p['id']){ echo "selected"; } ?>><?php echo $p['name']; ?></option>
-                                      <?php endforeach; ?>
-                                    </select>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-male"></i></span>
+                                        <select name="project_id" class="form-control">
+                                        <option value="">PROJECTO</option>
+                                        <?php foreach($projects as $p):?>
+                                            <option value="<?php echo $p['id']; ?>" <?php if(isset($_GET["project_id"]) && $_GET["project_id"]==$p['id']){ echo "selected"; } ?>><?php echo $p['name']; ?></option>
+                                        <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-support"></i></span>
-                                    <select name="priority_id" class="form-control">
-                                    <option value="">PRIORIDAD</option>
-                                      <?php foreach($priorities as $p):?>
-                                        <option value="<?php echo $p['id']; ?>" <?php if(isset($_GET["priority_id"]) && $_GET["priority_id"]==$p['id']){ echo "selected"; } ?>><?php echo $p['name']; ?></option>
-                                      <?php endforeach; ?>
-                                    </select>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-support"></i></span>
+                                        <select name="priority_id" class="form-control">
+                                        <option value="">PRIORIDAD</option>
+                                        <?php foreach($priorities as $p):?>
+                                            <option value="<?php echo $p['id']; ?>" <?php if(isset($_GET["priority_id"]) && $_GET["priority_id"]==$p['id']){ echo "selected"; } ?>><?php echo $p['name']; ?></option>
+                                        <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                  <span class="input-group-addon">INICIO</span>
-                                  <input type="date" name="start_at" value="<?php if(isset($_GET["start_at"]) && $_GET["start_at"]!=""){ echo $_GET["start_at"]; } ?>" class="form-control" placeholder="Palabra clave">
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">INICIO</span>
+                                    <input type="date" name="start_at" value="<?php if(isset($_GET["start_at"]) && $_GET["start_at"]!=""){ echo $_GET["start_at"]; } ?>" class="form-control" placeholder="Palabra clave">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="input-group">
-                                  <span class="input-group-addon">FIN</span>
-                                  <input type="date" name="finish_at" value="<?php if(isset($_GET["finish_at"]) && $_GET["finish_at"]!=""){ echo $_GET["finish_at"]; } ?>" class="form-control" placeholder="Palabra clave">
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                    <span class="input-group-addon">FIN</span>
+                                    <input type="date" name="finish_at" value="<?php if(isset($_GET["finish_at"]) && $_GET["finish_at"]!=""){ echo $_GET["finish_at"]; } ?>" class="form-control" placeholder="Palabra clave">
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-3">

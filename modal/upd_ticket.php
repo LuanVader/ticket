@@ -1,9 +1,29 @@
 <?php
-    $projects =mysqli_query($con, "select * from project");
-    $priorities =mysqli_query($con, "select * from priority");
-    $statuses =mysqli_query($con, "select * from status");
-    $kinds =mysqli_query($con, "select * from kind");
-    $categories =mysqli_query($con, "select * from category");
+    $queryproject = "";
+    $querypriority = "";
+    $querystatus = "";
+    $querykind = "";
+    $querycategory = "";
+
+    if ($_SESSION["nivel"] == 'Administrador' ){
+        $queryproject = "select * from project";
+        $querypriority = "select * from priority";
+        $querystatus = "select * from status";
+        $querykind = "select * from kind";
+        $querycategory = "select * from category";
+    }else{
+        $queryproject = "SELECT p.* from project p INNER JOIN user u ON u.area = p.id WHERE u.id =".$_SESSION["user_id"];
+        $querypriority = "select * from priority WHERE id = 2";
+        $querystatus = "select * from status WHERE id = 1";
+        $querykind = "select * from kind";
+        $querycategory = "select * from category";
+    }
+
+    $projects =mysqli_query($con, $queryproject);
+    $priorities =mysqli_query($con, $querypriority);
+    $statuses =mysqli_query($con, $querystatus);
+    $kinds =mysqli_query($con, $querykind);
+    $categories =mysqli_query($con, $querycategory);
 ?>
     <!-- Modal -->
     <div class="modal fade bs-example-modal-lg-udp" tabindex="-1" role="dialog" aria-hidden="true">

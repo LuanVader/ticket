@@ -77,14 +77,14 @@ session_start();
         if ($numrows>0){
             
             ?>
-            <table class="table table-striped jambo_table bulk_action">
+            <table class="table table-sm table-striped table-hover">
                 <thead>
                     <tr class="headings">
-                        <th class="column-title">Asunto </th>
-                        <th class="column-title">Proyecto </th>
-                        <th class="column-title">Prioridad </th>
-                        <th class="column-title">Estado </th>
-                        <th>Fecha</th>
+                        <th class="column-title">ASUNTO </th>
+                        <th class="column-title">ÁREA </th>
+                        <th class="column-title">PRIORIDAD </th>
+                        <th class="column-title">ESTADO </th>
+                        <th>FECHA</th>
                         <th class="column-title no-link last"><span class="nobr"></span></th>
                     </tr>
                 </thead>
@@ -123,7 +123,7 @@ session_start();
                     <input type="hidden" value="<?php echo $description;?>" id="description<?php echo $id;?>">
 
                     <!-- me obtiene los datos -->
-                 <input type="hidden" value="<?php echo $kind_id;?>" id="kind_id<?php echo $id;?>">
+                    <input type="hidden" value="<?php echo $kind_id;?>" id="kind_id<?php echo $id;?>">
                     <input type="hidden" value="<?php echo $project_id;?>" id="project_id<?php echo $id;?>">
                     <input type="hidden" value="<?php echo $category_id;?>" id="category_id<?php echo $id;?>">
                     <input type="hidden" value="<?php echo $priority_id;?>" id="priority_id<?php echo $id;?>">
@@ -131,14 +131,27 @@ session_start();
 
 
                     <tr class="even pointer">
-                        <td><?php echo $title;?></td>
-                        <td><?php echo $name_project; ?></td>
-                        <td><?php echo $name_priority; ?></td>
-                        <td><?php echo $name_status;?></td>
-                        <td><?php echo $created_at;?></td>
+                        <td style="vertical-align: middle;padding: 5px 5px 5px 5px;"><?php echo $title;?></td>
+                        <td style="vertical-align: middle;padding: 5px 5px 5px 5px;"><?php echo $name_project; ?></td>
+                        <td style="vertical-align: middle;padding: 5px 5px 5px 5px;"><label class="bg-<?php if ($priority_id == 1) {
+                            echo "red";
+                        }elseif ($priority_id == 2) {
+                            echo "blue";
+                        }else {
+                            echo "green";
+                        } ?>" style="border-radius: 10px;padding: 5px;"><?php echo $name_priority; ?></label></td>
+                        <td style="vertical-align: middle;padding: 5px 5px 5px 5px;"><?php echo $name_status;?></td>
+                        <td style="vertical-align: middle;padding: 5px 5px 5px 5px;"><?php echo $created_at;?></td>
                         <td ><span class="pull-right">
-                        <a href="#" class='btn btn-default' title='Editar producto' onclick="obtener_datos('<?php echo $id;?>');" data-toggle="modal" data-target=".bs-example-modal-lg-udp"><i class="glyphicon glyphicon-edit"></i></a> 
-                        <a href="#" class='btn btn-default' title='Borrar producto' onclick="eliminar('<?php echo $id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
+                        <?php
+                            if ($_SESSION["nivel"] == 'Administrador' || $_SESSION["nivel"] == 'Soporte') {
+                        ?>
+                        <a href="#" class='btn btn-sm btn-warning' title='Agregar Comentarios' onclick="obtener_datos('<?php echo $id;?>');" data-toggle="modal" data-target=".bs-example-modal-lg-obs"><i class="glyphicon glyphicon-repeat"></i></a> 
+                        <?php
+                            }
+                        ?>
+                        <a href="#" class='btn btn-sm btn-info' title='Editar producto' onclick="obtener_datos('<?php echo $id;?>');" data-toggle="modal" data-target=".bs-example-modal-lg-udp"><i class="glyphicon glyphicon-edit"></i></a> 
+                        <a href="#" class='btn btn-sm btn-danger' title='Borrar producto' onclick="eliminar('<?php echo $id; ?>')"><i class="glyphicon glyphicon-trash"></i> </a></span></td>
                     </tr>
                 <?php
                     } //en while

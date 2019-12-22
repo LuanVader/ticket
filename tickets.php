@@ -12,6 +12,7 @@
                     <?php
                         include("modal/new_ticket.php");
                         include("modal/upd_ticket.php");
+                        include("modal/new_obs_ticket.php");
                     ?>
                     <div class="x_panel">
                         <div class="x_title">
